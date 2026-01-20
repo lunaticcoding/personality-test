@@ -1,0 +1,400 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #5B7FFF;
+    --primary-dark: #4366e0;
+    --accept: #4CAF50;
+    --reject: #ef5350;
+    --bg: #f5f7fa;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+    max-width: 420px;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+    background: var(--bg);
+}
+
+.screen {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Intro Screen */
+#intro-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.intro-content h1 {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.intro-content p {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+.intro-content .instruction {
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Swipe Screen */
+#swipe-screen {
+    padding-top: 15px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+#progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+#progress-text {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+#card-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.card {
+    width: 85%;
+    max-width: 300px;
+    aspect-ratio: 3 / 4;
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 30px;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+    position: absolute;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+.card.swiping {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.card.swipe-left {
+    transform: translateX(-150%) rotate(-30deg);
+    opacity: 0;
+}
+
+.card.swipe-right {
+    transform: translateX(150%) rotate(30deg);
+    opacity: 0;
+}
+
+.card.accept-hint {
+    box-shadow: 0 0 0 4px var(--accept), var(--shadow-lg);
+}
+
+.card.reject-hint {
+    box-shadow: 0 0 0 4px var(--reject), var(--shadow-lg);
+}
+
+.swipe-hint {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.hint-left {
+    color: var(--reject);
+}
+
+.hint-right {
+    color: var(--accept);
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding-bottom: 30px;
+}
+
+.btn-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+}
+
+.btn-reject {
+    background: white;
+    color: var(--reject);
+    border: 3px solid var(--reject);
+}
+
+.btn-reject:hover, .btn-reject:active {
+    background: var(--reject);
+    color: white;
+}
+
+.btn-accept {
+    background: white;
+    color: var(--accept);
+    border: 3px solid var(--accept);
+}
+
+.btn-accept:hover, .btn-accept:active {
+    background: var(--accept);
+    color: white;
+}
+
+/* Compare Screen */
+#compare-screen {
+    padding-top: 30px;
+}
+
+#compare-progress {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+#compare-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.compare-card {
+    flex: 1;
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 3px solid transparent;
+}
+
+.compare-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.compare-card:active {
+    transform: scale(0.98);
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.compare-card.selected {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: scale(0.98);
+}
+
+.compare-instruction {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    padding: 20px 0 30px;
+}
+
+/* Result Screen */
+#result-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#result-screen h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 30px;
+}
+
+#result-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    max-width: 340px;
+    margin-bottom: 40px;
+}
+
+.result-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 25px 15px;
+    box-shadow: var(--shadow);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.result-card .rank {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+#restart-btn {
+    margin-top: 10px;
+}
+
+/* Animations */
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.card-enter {
+    animation: cardEnter 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Mobile optimizations */
+@media (max-height: 650px) {
+    .card {
+        aspect-ratio: 4 / 3;
+    }
+
+    .btn-circle {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+    }
+
+    .button-row {
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-height: 550px) {
+    #intro-screen .intro-content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    #intro-screen .intro-content p {
+        margin-bottom: 10px;
+    }
+}

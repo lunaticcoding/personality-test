@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Value Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="screen active">
+            <div class="intro-content">
+                <h1>Value Finder</h1>
+                <p>Discover your 4 core values through a simple card-swiping exercise.</p>
+                <p class="instruction">Swipe right (or tap ✓) for values that resonate with you.<br>Swipe left (or tap ✗) to dismiss.</p>
+                <button id="start-btn" class="btn-primary">Start</button>
+            </div>
+        </div>
+
+        <!-- Swipe Screen -->
+        <div id="swipe-screen" class="screen">
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+            <p id="progress-text">1 / 40</p>
+
+            <div id="card-container">
+                <div id="card" class="card">
+                    <span id="card-word"></span>
+                </div>
+            </div>
+
+            <div class="swipe-hint">
+                <span class="hint-left">← Reject</span>
+                <span class="hint-right">Accept →</span>
+            </div>
+
+            <div class="button-row">
+                <button id="reject-btn" class="btn-circle btn-reject">✗</button>
+                <button id="accept-btn" class="btn-circle btn-accept">✓</button>
+            </div>
+        </div>
+
+        <!-- Comparison Screen -->
+        <div id="compare-screen" class="screen">
+            <p id="compare-progress">Narrowing down your values...</p>
+            <div id="compare-container">
+                <div id="compare-card-1" class="compare-card">
+                    <span class="compare-word"></span>
+                </div>
+                <div id="compare-card-2" class="compare-card">
+                    <span class="compare-word"></span>
+                </div>
+            </div>
+            <p class="compare-instruction">Tap the value that matters more to you</p>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="screen">
+            <h2>Your Core Values</h2>
+            <div id="result-cards"></div>
+            <button id="restart-btn" class="btn-primary">Start Over</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
